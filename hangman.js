@@ -20,7 +20,7 @@ let incorrectGuesses = 0;
 let guessedLetters = [];
 
 while (gameInProgress && incorrectGuesses <= maxGuesses) {
-  // new secret woord for each game
+  // new secret word for each game
   let secretWord = chooseWord();
   displayState(secretWord);
   playerGuess();
@@ -35,21 +35,32 @@ function displayState(word) {
     dashedWord += "-";
   }
 
-  console.log("Are you able to guess this word?\n");
+  console.log(`Are you able to guess this ${word.length} letter word?\n`);
   console.log(dashedWord);
   console.log(`Letters Tried: ${guessedLetters}`);
   console.log(
     `\nYou have ${
       maxGuesses - incorrectGuesses
-    } chances to guess each letter correctly`
+    } chances to guess each letter correctly\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
   );
 }
 // 4. Prompt for input: Ask the player to enter a letter guess. You can use the `readline` module in Node.js to read user input from the terminal.
 function playerGuess() {
   let guess = prompt(`CHOOSE A LETTER: `);
-  guessedLetters.push(guess.toLowerCase());
+  // 5. Check the input: Validate the player's input to ensure it is a single letter. Handle cases where the player enters an invalid input (e.g., a number or multiple letters).
+  // used isNaN to check if the input is a number https://www.w3schools.com/jsref/jsref_isnan.asp
+  if (!isNaN(guess)) {
+    console.log(
+      `You entered the number ${guess}. Please enter a single letter 😎`
+    );
+  } else if (guess.length === 1) {
+    // input can only be one character
+    guessedLetters.push(guess.toLowerCase());
+  } else {
+    console.log(`You entered: ${guess}. Please enter a single character 😎`);
+    playerGuess();
+  }
 }
-// 5. Check the input: Validate the player's input to ensure it is a single letter. Handle cases where the player enters an invalid input (e.g., a number or multiple letters).
 
 // 6. Update the game state: Determine if the guessed letter is correct and update the hidden word accordingly. Replace the corresponding underscores or dashes with the correct letter.
 

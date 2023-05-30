@@ -18,12 +18,28 @@ let currentGuess = 0;
 let incorrectGuesses = 0;
 
 while (gameInProgress && incorrectGuesses <= maxGuesses) {
+  // new secret woord for each game
   let secretWord = chooseWord();
-  console.log(chooseWord());
+  displayState(secretWord);
 }
 
 // 3. Display the initial state: At the start of each round, display the current state of the hidden word to the player. Initially, all letters are hidden and replaced with underscores or dashes.
+function displayState(word) {
+  let dashedWord = "";
+  let splitWord = word.split("");
 
+  for (i = 0; i < splitWord.length; i++) {
+    dashedWord += "-";
+  }
+
+  console.log("Are you able to guess this word?\n");
+  console.log(dashedWord);
+  console.log(
+    `\nYou have ${
+      maxGuesses - incorrectGuesses
+    } chances to guess each letter correctly`
+  );
+}
 // 4. Prompt for input: Ask the player to enter a letter guess. You can use the `readline` module in Node.js to read user input from the terminal.
 
 // 5. Check the input: Validate the player's input to ensure it is a single letter. Handle cases where the player enters an invalid input (e.g., a number or multiple letters).

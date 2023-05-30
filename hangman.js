@@ -13,6 +13,8 @@ function chooseWord() {
 // Initialize game variables: Before the game loop, initialize the necessary variables. These variables may include the hidden word, the player's guessed letters, the maximum number of incorrect guesses allowed, and the current number of incorrect guesses.
 
 let gameInProgress = true;
+// new secret word for each game
+let secretWord = chooseWord();
 
 const maxGuesses = 6;
 let currentGuess = 0;
@@ -20,8 +22,6 @@ let incorrectGuesses = 0;
 let guessedLetters = [];
 
 while (gameInProgress && incorrectGuesses <= maxGuesses) {
-  // new secret word for each game
-  let secretWord = chooseWord();
   displayState(secretWord);
   playerGuess();
 }
@@ -31,6 +31,7 @@ function displayState(word) {
   let dashedWord = "";
   let splitWord = word.split("");
 
+  // hide the secret word from the user
   for (i = 0; i < splitWord.length; i++) {
     dashedWord += "-";
   }

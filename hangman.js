@@ -1,4 +1,4 @@
-// Steps 1 -10 were provided by chatGPT
+// All Steps were provided by chatGPT,  code provided by me and refrenced when applicable
 
 // 1. Choose a word: Create an array of words from which the game will randomly select one. You can start with a small set of words and expand it later.
 const wordList = ["cycle", "subway", "quiz"];
@@ -6,9 +6,21 @@ const wordList = ["cycle", "subway", "quiz"];
 function chooseWord() {
   return wordList[Math.floor(Math.random() * wordList.length)];
 }
-console.log(chooseWord());
+// console.log(chooseWord());
 
 // 2. Set up the game loop: Create a loop that continues until the game is won or lost. This loop will handle each round of the game.
+// Initialize game variables: Before the game loop, initialize the necessary variables. These variables may include the hidden word, the player's guessed letters, the maximum number of incorrect guesses allowed, and the current number of incorrect guesses.
+
+let gameInProgress = true;
+
+const maxGuesses = 6;
+let currentGuess = 0;
+let incorrectGuesses = 0;
+
+while (gameInProgress && incorrectGuesses <= maxGuesses) {
+  let secretWord = chooseWord();
+  console.log(chooseWord());
+}
 
 // 3. Display the initial state: At the start of each round, display the current state of the hidden word to the player. Initially, all letters are hidden and replaced with underscores or dashes.
 

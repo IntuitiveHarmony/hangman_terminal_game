@@ -54,6 +54,7 @@ function playerGuess() {
     console.log(
       `You entered the number ${guess}. Please enter a single letter 😎`
     );
+    playerGuess();
   } else if (guess.length === 1) {
     // input can only be one character
     guessedLetters.push(guess.toLowerCase());

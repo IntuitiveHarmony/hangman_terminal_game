@@ -1,3 +1,4 @@
+var prompt = require("prompt-sync")();
 // All Steps were provided by chatGPT,  code provided by me and refrenced when applicable
 
 // 1. Choose a word: Create an array of words from which the game will randomly select one. You can start with a small set of words and expand it later.
@@ -16,11 +17,13 @@ let gameInProgress = true;
 const maxGuesses = 6;
 let currentGuess = 0;
 let incorrectGuesses = 0;
+let guessedLetters = [];
 
 while (gameInProgress && incorrectGuesses <= maxGuesses) {
   // new secret woord for each game
   let secretWord = chooseWord();
   displayState(secretWord);
+  playerGuess();
 }
 
 // 3. Display the initial state: At the start of each round, display the current state of the hidden word to the player. Initially, all letters are hidden and replaced with underscores or dashes.
@@ -34,6 +37,7 @@ function displayState(word) {
 
   console.log("Are you able to guess this word?\n");
   console.log(dashedWord);
+  console.log(`Letters Tried: ${guessedLetters}`);
   console.log(
     `\nYou have ${
       maxGuesses - incorrectGuesses
@@ -41,7 +45,10 @@ function displayState(word) {
   );
 }
 // 4. Prompt for input: Ask the player to enter a letter guess. You can use the `readline` module in Node.js to read user input from the terminal.
-
+function playerGuess() {
+  let guess = prompt(`CHOOSE A LETTER: `);
+  guessedLetters.push(guess.toLowerCase());
+}
 // 5. Check the input: Validate the player's input to ensure it is a single letter. Handle cases where the player enters an invalid input (e.g., a number or multiple letters).
 
 // 6. Update the game state: Determine if the guessed letter is correct and update the hidden word accordingly. Replace the corresponding underscores or dashes with the correct letter.

@@ -1,4 +1,12 @@
+// Steps 1 -10 were provided by chatGPT
+
 // 1. Choose a word: Create an array of words from which the game will randomly select one. You can start with a small set of words and expand it later.
+const wordList = ["cycle", "subway", "quiz"];
+
+function chooseWord() {
+  return wordList[Math.floor(Math.random() * wordList.length)];
+}
+console.log(chooseWord());
 
 // 2. Set up the game loop: Create a loop that continues until the game is won or lost. This loop will handle each round of the game.
 

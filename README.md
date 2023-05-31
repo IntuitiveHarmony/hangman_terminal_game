@@ -112,12 +112,30 @@ The response that it gave me started out pretty useful and then it just reiterat
 
 Seeing the idea to initialize all the game variables gave me enough to get started on this section and I also added it to my pseudocode.
 
+<br/>
 
 ## More Help from GPT and W3
 
 I was working validating the user input and wanted to have a condition that checked if the input was a number.  Since the `prompt-sync` package returns a string I started out trying to use the `parseInt()` and `typeof` javascript methods.  This approach didnot give me the desired results.  Within the response of my question to chatGPT I noticed another method `isNaN`.  After a bit of research at [W3 Schools](https://www.w3schools.com/jsref/jsref_isnan.asp) i tested this out in my code and it worked perfectly. 
 
 The last help I asked of chatGPT was for clarity around itterating over a string. I hgad be converting a string to an array in the `updateDashedWords()` function.  Once I started iterating over the string directly my code become DRYer, instantly.
+
+<br/>
+
+## Reaching Out to the Stack
+
+The last resource that I used in completing this game was this article from [Stack Overflow](https://stackoverflow.com/questions/448919/how-can-i-remove-a-commit-on-github).  The issue I was running into was that I accidentally commited changes that I didn't mean to and pushed them to my remote repo on gitHub. I was able to `reset` the head back to my previous commit and then add the code that I actually wanted to commit back into `hangman.js`.  When I went to push this new commit to gitHub it gave me an error: `error: failed to push some refs to hangman_terminal_game` and `fatal: refusing to merge unrelated histories`
+
+In order to find this I searched "how to delete a commit from gitHub".  I felt confident that I was going to get a fairly accurate answer because of two aspects:
+1. All the upvotes the answer had  
+2. The green checkmark means the original poster tried this solution and it worked for them.
+
+I only ended up using the `git push origin main --force` command since I deleted the commit from my local machine already.  This essentially rewrote the comit history of my remote repo to match my local history.  This is an ok soulution since I am working solo on this game.  Had I done this while working in a group where we are all working off the same remote repo I would have made issues for all my group members' local commit histories now.
+
+<br/>
+
+## Conclusion
+
 
 
 

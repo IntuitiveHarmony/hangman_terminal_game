@@ -18,16 +18,33 @@ let secretWord = chooseWord();
 let dashedWord = "";
 
 const maxGuesses = 6;
+let gameNumber = 0;
 let currentGuess = 0;
 let incorrectGuesses = 0;
 let guessedLetters = [];
 
-while (gameInProgress) {
-  updateDashedWord();
-  displayState();
-  playerGuess();
-  updateDashedWord();
-  checkWin();
+function main() {
+  // initialize parameters for another game
+  gameInProgress = true;
+  secretWord = chooseWord();
+  dashedWord = "";
+  currentGuess = 0;
+  incorrectGuesses = 0;
+  guessedLetters = [];
+
+  while (gameInProgress) {
+    updateDashedWord();
+    displayState();
+    playerGuess();
+    updateDashedWord();
+    checkWin();
+  }
+  promptRestart();
+}
+
+// Call main for the first time
+if (gameNumber === 0) {
+  main();
 }
 
 function updateDashedWord() {
@@ -108,5 +125,16 @@ function displayLoss() {
   gameInProgress = false;
 }
 // 10. Prompt for a new game: Ask the player if they want to play again. If they agree, restart the game loop. If not, exit the program.
-
+function promptRestart() {
+  console.log(
+    `\nWould you like to play another round of hangman?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+  );
+  let restart = prompt(`ENTER Y or N: `);
+  if (restart.toLowerCase() === "y") {
+    console.log(`\nAwesome! Lets play again!`);
+    main();
+  } else {
+    console.log(`\nThanks for playing Hangman!`);
+  }
+}
 // These steps provide a high-level overview of the Hangman game's structure and flow. As you start implementing each step, you can break them down into smaller tasks and gradually build the game.

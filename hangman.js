@@ -1,4 +1,4 @@
-var prompt = require("prompt-sync")();
+const prompt = require("prompt-sync")();
 // All Steps were provided by chatGPT,  code provided by me and refrenced when applicable
 
 // 1. Choose a word: Create an array of words from which the game will randomly select one. You can start with a small set of words and expand it later.
@@ -9,19 +9,22 @@ function chooseWord() {
 }
 // console.log(chooseWord());
 
-// 2. Set up the game loop: Create a loop that continues until the game is won or lost. This loop will handle each round of the game.
 // Initialize game variables: Before the game loop, initialize the necessary variables. These variables may include the hidden word, the player's guessed letters, the maximum number of incorrect guesses allowed, and the current number of incorrect guesses.
-
 let gameInProgress = true;
 // new secret word for each game
 let secretWord = chooseWord();
 let dashedWord = "";
 
-const maxGuesses = 6;
+const maxGuesses = 6; // head + body + 2 arms + 2 legs
 let gameNumber = 0;
 let currentGuess = 0;
 let incorrectGuesses = 0;
 let guessedLetters = [];
+
+// Call main for the first time
+if (gameNumber === 0) {
+  main();
+}
 
 function main() {
   // initialize parameters for another game
@@ -32,6 +35,7 @@ function main() {
   incorrectGuesses = 0;
   guessedLetters = [];
 
+  // 2. Set up the game loop: Create a loop that continues until the game is won or lost. This loop will handle each round of the game.
   while (gameInProgress) {
     updateDashedWord();
     displayState();
@@ -42,11 +46,7 @@ function main() {
   promptRestart();
 }
 
-// Call main for the first time
-if (gameNumber === 0) {
-  main();
-}
-
+// Show the word with dashes or letters depending which letters the user has guessed
 function updateDashedWord() {
   dashedWord = "";
   for (i = 0; i < secretWord.length; i++) {
@@ -73,6 +73,7 @@ function displayState(word) {
     } chances left to guess each letter correctly\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
   );
 }
+
 // 4. Prompt for input: Ask the player to enter a letter guess. You can use the `readline` module in Node.js to read user input from the terminal.
 function playerGuess() {
   let guess = prompt(`CHOOSE A LETTER: `);
@@ -110,6 +111,7 @@ function checkWin() {
     displayLoss();
   }
 }
+
 // 9. Display the result: After the game loop ends (either by winning or losing), display the result to the player. Show the correct word if the game is lost.
 function displayWin() {
   console.log(
@@ -124,6 +126,7 @@ function displayLoss() {
   );
   gameInProgress = false;
 }
+
 // 10. Prompt for a new game: Ask the player if they want to play again. If they agree, restart the game loop. If not, exit the program.
 function promptRestart() {
   console.log(
@@ -132,6 +135,7 @@ function promptRestart() {
   let restart = prompt(`ENTER Y or N: `);
   if (restart.toLowerCase() === "y") {
     console.log(`\nAwesome! Lets play again!`);
+    gameNumber += 1;
     main();
   } else {
     console.log(`\nThanks for playing Hangman!`);

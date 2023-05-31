@@ -15,6 +15,7 @@ function chooseWord() {
 let gameInProgress = true;
 // new secret word for each game
 let secretWord = chooseWord();
+let dashedWord = "";
 
 const maxGuesses = 6;
 let currentGuess = 0;
@@ -22,26 +23,29 @@ let incorrectGuesses = 0;
 let guessedLetters = [];
 
 while (gameInProgress && incorrectGuesses <= maxGuesses) {
-  displayState(secretWord);
+  updateDashedWord();
+  displayState();
   playerGuess();
+  updateDashedWord();
+  checkWin();
 }
 
-// 3. Display the initial state: At the start of each round, display the current state of the hidden word to the player. Initially, all letters are hidden and replaced with underscores or dashes.
-function displayState(word) {
-  let dashedWord = "";
-  // dashedWord = "";
-  for (i = 0; i < word.length; i++) {
+function updateDashedWord() {
+  dashedWord = "";
+  for (i = 0; i < secretWord.length; i++) {
     // 6. Update the game state: Determine if the guessed letter is correct and update the hidden word accordingly. Replace the corresponding underscores or dashes with the correct letter.
-    if (guessedLetters.includes(word[i])) {
-      dashedWord += word[i];
+    if (guessedLetters.includes(secretWord[i])) {
+      dashedWord += secretWord[i];
     } else {
       // hide the secret word from the user
       dashedWord += "-";
     }
   }
-  checkWin(dashedWord);
+}
 
-  console.log(`Are you able to guess this ${word.length} letter word?\n`);
+// 3. Display the initial state: At the start of each round, display the current state of the hidden word to the player. Initially, all letters are hidden and replaced with underscores or dashes.
+function displayState(word) {
+  console.log(`Are you able to guess this ${secretWord.length} letter word?\n`);
   console.log(dashedWord);
   console.log(`Letters Tried: ${guessedLetters}`);
   console.log(
@@ -72,8 +76,8 @@ function playerGuess() {
 // 7. Track incorrect guesses: Maintain a counter to keep track of the number of incorrect guesses the player has made. Display the hangman figure corresponding to the number of incorrect guesses.
 
 // 8. Check win/lose conditions: After each guess, check if the player has won or lost the game. The game is won if all letters have been correctly guessed. The game is lost if the player has made a certain number of incorrect guesses.
-function checkWin(dashedWord) {
-  console.log(secretWord, dashedWord);
+function checkWin() {
+  // console.log(secretWord, dashedWord);
   if (secretWord === dashedWord) {
     console.log(`You've won!`);
     gameInProgress = false;

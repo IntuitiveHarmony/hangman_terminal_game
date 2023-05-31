@@ -22,7 +22,7 @@ let currentGuess = 0;
 let incorrectGuesses = 0;
 let guessedLetters = [];
 
-while (gameInProgress && incorrectGuesses <= maxGuesses) {
+while (gameInProgress) {
   updateDashedWord();
   displayState();
   playerGuess();
@@ -88,14 +88,25 @@ function playerGuess() {
 function checkWin() {
   // console.log(secretWord, dashedWord);
   if (secretWord === dashedWord) {
-    console.log(
-      `You've won!\n\nThe word was ${secretWord}.\nIt took you ${currentGuess} guesses`
-    );
-    gameInProgress = false;
+    displayWin();
+  } else if (incorrectGuesses >= maxGuesses) {
+    displayLoss();
   }
 }
 // 9. Display the result: After the game loop ends (either by winning or losing), display the result to the player. Show the correct word if the game is lost.
+function displayWin() {
+  console.log(
+    `You've won!\n\nThe word was ${secretWord}.\nIt took you ${currentGuess} guesses`
+  );
+  gameInProgress = false;
+}
 
+function displayLoss() {
+  console.log(
+    `You've lost!\n\nThe word was ${secretWord}.\nYou used ${currentGuess} guesses`
+  );
+  gameInProgress = false;
+}
 // 10. Prompt for a new game: Ask the player if they want to play again. If they agree, restart the game loop. If not, exit the program.
 
 // These steps provide a high-level overview of the Hangman game's structure and flow. As you start implementing each step, you can break them down into smaller tasks and gradually build the game.

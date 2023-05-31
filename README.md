@@ -136,8 +136,4 @@ I only ended up using the `git push origin main --force` command since I deleted
 
 ## Conclusion
 
-
-
-
-
-
+We all rely on other for guidence, insipration and knowledge.  The flip side of this is that in order to learn anything we must work hard and have own own discerning mind.  One that is able to take in information, refactor and apply it to our own specific applications. 

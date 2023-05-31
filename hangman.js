@@ -29,11 +29,15 @@ while (gameInProgress && incorrectGuesses <= maxGuesses) {
 // 3. Display the initial state: At the start of each round, display the current state of the hidden word to the player. Initially, all letters are hidden and replaced with underscores or dashes.
 function displayState(word) {
   let dashedWord = "";
-  let splitWord = word.split("");
 
-  // hide the secret word from the user
-  for (i = 0; i < splitWord.length; i++) {
-    dashedWord += "-";
+  for (i = 0; i < word.length; i++) {
+    // 6. Update the game state: Determine if the guessed letter is correct and update the hidden word accordingly. Replace the corresponding underscores or dashes with the correct letter.
+    if (guessedLetters.includes(word[i])) {
+      dashedWord += word[i];
+    } else {
+      // hide the secret word from the user
+      dashedWord += "-";
+    }
   }
 
   console.log(`Are you able to guess this ${word.length} letter word?\n`);
@@ -52,19 +56,17 @@ function playerGuess() {
   // used isNaN to check if the input is a number https://www.w3schools.com/jsref/jsref_isnan.asp
   if (!isNaN(guess)) {
     console.log(
-      `You entered the number ${guess}. Please enter a single letter 😎`
+      `\nYou entered the number ${guess}. Please enter a single letter 😎`
     );
-    playerGuess();
+  } else if (guessedLetters.includes(guess)) {
+    console.log(`\nYou have already tried ${guess}!`);
   } else if (guess.length === 1) {
     // input can only be one character
     guessedLetters.push(guess.toLowerCase());
   } else {
-    console.log(`You entered: ${guess}. Please enter a single character 😎`);
-    playerGuess();
+    console.log(`\nYou entered: ${guess}. Please enter a single character 😎`);
   }
 }
-
-// 6. Update the game state: Determine if the guessed letter is correct and update the hidden word accordingly. Replace the corresponding underscores or dashes with the correct letter.
 
 // 7. Track incorrect guesses: Maintain a counter to keep track of the number of incorrect guesses the player has made. Display the hangman figure corresponding to the number of incorrect guesses.
 

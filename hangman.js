@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")();
+const prompt = require("prompt-sync")({ sigint: true });
 // All Steps were provided by chatGPT,  code provided by me and refrenced when applicable
 
 // 1. Choose a word: Create an array of words from which the game will randomly select one. You can start with a small set of words and expand it later.
